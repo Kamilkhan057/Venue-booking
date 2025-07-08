@@ -5,15 +5,19 @@ import History from "./History";
 import Feedback from "./Feedback";
 import Remarks from "./Remarks";
 import Navbar from "./Navbar";
-import { 
-  FaCalendarAlt, 
-  FaClock, 
-  FaHistory, 
-  FaCommentAlt, 
+import Contact from "./Contact";
+import FAQ from "./FAQ";
+
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaHistory,
+  FaCommentAlt,
   FaStickyNote,
   FaUser,
   FaSignOutAlt,
-  FaTimes
+  FaTimes,
+  FaQuestionCircle,
 } from "react-icons/fa";
 
 function Dashboard() {
@@ -30,9 +34,8 @@ function Dashboard() {
     }
   }, [activeTab]);
 
-  // Prevent body scroll when sidebar is open on mobile
   useEffect(() => {
-    document.body.style.overflow = sidebarOpen ? 'hidden' : 'auto';
+    document.body.style.overflow = sidebarOpen ? "hidden" : "auto";
   }, [sidebarOpen]);
 
   const renderContent = () => {
@@ -47,6 +50,10 @@ function Dashboard() {
         return <div id="feedback-section"><Feedback /></div>;
       case "remarks":
         return <div id="remarks-section"><Remarks /></div>;
+     case "contact":
+  return <div id="contact-section"><Contact /></div>;
+case "faq":
+  return <div id="faq-section"><FAQ /></div>;
       default:
         return <div>Select an option</div>;
     }
@@ -69,8 +76,8 @@ function Dashboard() {
               <h2 className="text-xl font-bold text-white tracking-wide">
                 Dashboard Menu
               </h2>
-              <button 
-                onClick={() => setSidebarOpen(false)} 
+              <button
+                onClick={() => setSidebarOpen(false)}
                 className="md:hidden text-white hover:text-blue-200 transition"
               >
                 <FaTimes />
@@ -84,6 +91,8 @@ function Dashboard() {
                 { key: "history", label: "History", icon: <FaHistory className="mr-3" /> },
                 { key: "feedback", label: "Feedback", icon: <FaCommentAlt className="mr-3" /> },
                 { key: "remarks", label: "Remarks", icon: <FaStickyNote className="mr-3" /> },
+                { key: "contact", label: "Contact", icon: <FaUser className="mr-3" /> },
+                { key: "faq", label: "FAQ", icon: <FaQuestionCircle className="mr-3" /> },
               ].map((item) => (
                 <button
                   key={item.key}
@@ -123,7 +132,7 @@ function Dashboard() {
               <div className="bg-blue-600/40 backdrop-blur-sm rounded-xl p-4 border border-blue-500">
                 <h3 className="text-xs font-semibold text-blue-200 uppercase tracking-wider mb-2">Premium Account</h3>
                 <div className="h-2 bg-blue-800 rounded-full mb-2">
-                  <div className="h-2 bg-green-400 rounded-full" style={{ width: '75%' }}></div>
+                  <div className="h-2 bg-green-400 rounded-full" style={{ width: "75%" }}></div>
                 </div>
                 <p className="text-xs text-blue-100">75% of features used</p>
               </div>
@@ -131,9 +140,9 @@ function Dashboard() {
           </div>
         )}
 
-        {/* Main Content with internal scroll */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div className="bg-white rounded-2xl shadow-lg p-4 md:p-8 min-h-full">
+        {/* Main Content */}
+        <div className="flex-1 overflow-y-auto p-0 md:p-1">
+          <div className="bg-white rounded-1xl shadow-lg p-4 md:p-3">
             {renderContent()}
           </div>
         </div>
